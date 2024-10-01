@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Map Example Using Javascript</title>
+
+    <!-- Load the Google Maps API -->
+    <script src="YOUR API" async defer></script>
+    <!------------------------------>
+
+</head>
+<body>
+
+<!-- Map container -->
+<div id="map"></div>
+
+<p id="directions"></p> 
+
+<script src="https://www.unpkg.com/@eohjsc/era-widget@1.1.3/src/index.js"></script>
+
+<script>
+    const eraWidget = new EraWidget();
+    let configLAT = null;
+    let configLON = null;
+    let configBUTTON = null;
+    let configSPEED = null;
+
+    let LAT = 0;  
+    let LON = 0;  
+    let SPEED = 0;  
+    let BUTTON = 0;
+    let lastPosition = null; 
+
+    window.onload = function() {
+        initMap(); // Initialize the map on page load
+    }
+
+    
+    eraWidget.init({
+        onConfiguration: (configuration) => {
+            // iFrame realtime configs
+            configLAT = configuration.realtime_configs[0];
+            configLON = configuration.realtime_configs[1];
+            configBUTTON = configuration.realtime_configs[2];
+            configSPEED = configuration.realtime_configs[3];
+        },
+
+        onValues: (values) => {
+            // To get value of sensor
+            if (configLAT && values[configLAT.id]) {
+                LAT = values[configLAT.id].value;
+                console.log("Value LAT:", LAT);
+            }
+            if (configLON && values[configLON.id]) {
+                LON = values[configLON.id].value;
+                console.log("Value LON:", LON);
+            }
+            if (configBUTTON && values[configBUTTON.id]) {
+                BUTTON = values[configBUTTON.id].value;
+                console.log("Value BUTTON:", BUTTON);
+            }
+            if (configSPEED && values[configSPEED.id]) {
+                SPEED = values[configSPEED.id].value;
+                console.log("Value SPEED:", SPEED);
+            }
+        },
+    });
+
+    let map;
+    let marker;
+    let currentPath;
+    let currentColor;
+    let pathCoordinates = [];
+    let updateInterval;
+
+    function initMap() {
+        const options = {
+            zoom: 14,
+            center: { lat: LAT, lng: LON }
+        };
+
+        map = new google.maps.Map(document.getElementById('map'), options);
+
+        marker = new google.maps.Marker({
+            position: { lat: LAT, lng: LON },
+            map: map
+        });
+
+        updateInterval = setInterval(updateMapCenter, 1000); // Update the map center every second
+    }
+
+    function updateMapCenter() {
+        if (LAT && LON) {
+            const newCenter = { lat: parseFloat(LAT), lng: parseFloat(LON) };
+
+            map.setCenter(newCenter);
+            marker.setPosition(newCenter);
+
+            if (BUTTON === 1) {
+                const strokeColor = getRainbowColorForSpeed(SPEED);
+
+                if (!currentPath || strokeColor !== currentColor) {
+                    if (pathCoordinates.length > 0) {
+                        currentPath.setPath(pathCoordinates); 
+                    }
+                    pathCoordinates = lastPosition ? [lastPosition] : [];
+                    currentColor = strokeColor;
+                    initializePath(strokeColor);
+                }
+
+                pathCoordinates.push(newCenter);
+                currentPath.setPath(pathCoordinates); 
+                
+                lastPosition = newCenter;
+            } else {
+                if (currentPath) {
+                    currentPath.setPath(pathCoordinates);
+                }
+                lastPosition = null; 
+            }
+        }
+    }
+
+    function initializePath(strokeColor) {
+        currentPath = new google.maps.Polyline({
+            path: [],
+            geodesic: true,
+            strokeColor: strokeColor,
+            strokeOpacity: 1.0,
+            strokeWeight: 4
+        });
+        currentPath.setMap(map);
+    }
+
+    function interpolateColor(color1, color2, factor) {
+        return [
+            Math.round(color1[0] + factor * (color2[0] - color1[0])),
+            Math.round(color1[1] + factor * (color2[1] - color1[1])),
+            Math.round(color1[2] + factor * (color2[2] - color1[2]))
+        ];
+    }
+
+    function getRainbowColorForSpeed(speed) {
+        const colors = [
+            [255, 0, 0],    // Red
+            [255, 165, 0],  // Orange
+            [255, 255, 0],  // Yellow
+            [0, 255, 0],    // Green
+            [0, 0, 255],    // Blue
+            [75, 0, 130],   // Indigo
+            [238, 130, 238] // Violet
+        ];
+
+        const numColors = colors.length;
+        const maxSpeed = 100;
+        const segment = maxSpeed / (numColors - 1); 
+
+        let startColorIndex = Math.floor(speed / segment);
+        let endColorIndex = startColorIndex + 1;
+
+        if (endColorIndex >= numColors) {
+            endColorIndex = numColors - 1;
+        }
+
+        const factor = (speed % segment) / segment;
+        const [r, g, b] = interpolateColor(colors[startColorIndex], colors[endColorIndex], factor);
+
+        return `rgb(${r}, ${g}, ${b})`;
+    }
+</script>
+
+<style>
+    #map {
+        height: 700px;
+        width: 100%;
+    }
+</style>
+
+</body>
+</html>
