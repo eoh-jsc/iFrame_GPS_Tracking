@@ -9,6 +9,8 @@ Source code: https://github.com/eoh-jsc/iFrame_GPS_Tracking
      
    ![image](https://github.com/user-attachments/assets/a0ae9a59-332e-4508-a8e5-439652dc622d)
 
+   - Thêm API đã tạo:
+   ![image](https://github.com/user-attachments/assets/83c42513-4e7c-4a05-a287-81585847903b)
 
 3. Deploy HTML trên Github: xem hướng dẫn iframe tại https://e-ra-iot-wiki.gitbook.io/documentation/huong-dan-su-dung-e-ra/hot-tinh-nang-iframe
    (sau khi Deploy, kiểm tra xem Google map đã hiện ra hay chưa)
