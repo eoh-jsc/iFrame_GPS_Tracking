@@ -1,3 +1,4 @@
+Source code: https://github.com/eoh-jsc/iFrame_GPS_Tracking
 1. Chỉnh sửa code của ESP32: bao gồm chân kết nối, loại thiết bị, loại sim và token!
 ![image](https://github.com/user-attachments/assets/12da63c0-199c-4aac-b95b-5bd81b058751)
 
@@ -23,3 +24,15 @@
    ![image](https://github.com/user-attachments/assets/d607155a-abf2-44bd-b80f-01c8754898c3)
 
 5. Trải nghiệm!
+
+/*************************************************************
+  Download latest ERa library here:
+    https://github.com/eoh-jsc/era-lib/releases/latest
+    https://www.arduino.cc/reference/en/libraries/era
+    https://registry.platformio.org/libraries/eoh-ltd/ERa/installation
+
+    ERa website:                https://e-ra.io
+    ERa blog:                   https://iotasia.org
+    ERa forum:                  https://forum.eoh.io
+    Follow us:                  https://www.fb.com/EoHPlatform
+ *************************************************************/
