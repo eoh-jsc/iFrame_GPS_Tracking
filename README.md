@@ -1,18 +1,18 @@
 Source code: https://github.com/eoh-jsc/iFrame_GPS_Tracking
 1. Chỉnh sửa code của ESP32: bao gồm chân kết nối, loại thiết bị, loại sim và token!
-   
+
 ![image](https://github.com/user-attachments/assets/12da63c0-199c-4aac-b95b-5bd81b058751)
 
-3. Chỉnh sửa code HTML:
+2. Chỉnh sửa code HTML:
    - Tạo API Google Map: https://developers.google.com/maps
    - Lưu ý: "ADD" website để được phép sử dụng API đã tạo.
      
    ![image](https://github.com/user-attachments/assets/799ac644-c5bc-4f60-9013-d23af4261798)
 
-4. Deploy HTML trên Github: xem hướng dẫn iframe tại https://e-ra-iot-wiki.gitbook.io/documentation/huong-dan-su-dung-e-ra/hot-tinh-nang-iframe
+3. Deploy HTML trên Github: xem hướng dẫn iframe tại https://e-ra-iot-wiki.gitbook.io/documentation/huong-dan-su-dung-e-ra/hot-tinh-nang-iframe
    (sau khi Deploy, kiểm tra xem Google map đã hiện ra hay chưa)
 
-5. Cấu hình E-Ra Platform
+4. Cấu hình E-Ra Platform
    - Virtual Pin:
    
    ![image](https://github.com/user-attachments/assets/cf582af9-ff86-482e-b960-4969f1b81413)
@@ -32,7 +32,7 @@ Source code: https://github.com/eoh-jsc/iFrame_GPS_Tracking
    ![image](https://github.com/user-attachments/assets/1740faa2-35d8-4612-9dbe-444a9fa5f2f0)
    ![image](https://github.com/user-attachments/assets/d607155a-abf2-44bd-b80f-01c8754898c3)
 
-6. Trải nghiệm!
+5. Trải nghiệm!
 
 /*************************************************************
 
