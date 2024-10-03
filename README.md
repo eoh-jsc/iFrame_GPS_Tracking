@@ -35,7 +35,9 @@ Source code: https://github.com/eoh-jsc/iFrame_GPS_Tracking
 6. Trải nghiệm!
 
 /*************************************************************
+
   Download latest ERa library here:
+  
     https://github.com/eoh-jsc/era-lib/releases/latest
     https://www.arduino.cc/reference/en/libraries/era
     https://registry.platformio.org/libraries/eoh-ltd/ERa/installation
@@ -44,4 +46,5 @@ Source code: https://github.com/eoh-jsc/iFrame_GPS_Tracking
     ERa blog:                   https://iotasia.org
     ERa forum:                  https://forum.eoh.io
     Follow us:                  https://www.fb.com/EoHPlatform
+    
  *************************************************************/
